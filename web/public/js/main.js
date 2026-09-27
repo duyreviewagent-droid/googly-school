@@ -855,7 +855,8 @@ const mmBg = (() => {
   g.font = 'bold 8px sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
   for (const r of Object.values(ROOMS)) {
     g.fillStyle = r.color + 'cc'; g.fillRect(X(r.x0) + 0.5, Z(r.z0) + 0.5, (r.x1 - r.x0) * MM.s - 1, (r.z1 - r.z0) * MM.s - 1);
-    g.fillStyle = '#fff'; g.fillText(r.name.toUpperCase(), X(r.cx), Z(r.cz));
+    const short = { detention: 'DET.', restroom: 'WC', nurse: '✚', lounge: 'SNACKS', english: 'ENGL.', science: 'SCI.', history: 'HIST.' }[r.id] || r.name.toUpperCase();
+    g.fillStyle = '#fff'; g.fillText(short, X(r.cx), Z(r.cz), (r.x1 - r.x0) * MM.s - 2);
   }
   g.fillStyle = '#1a1a1a'; g.fillText('HALLWAY', X(0), Z(0));
   return c;
@@ -1060,6 +1061,7 @@ async function startPlaying(fresh) {
   restyle();
   crowd.assign(G.year, { A: ['math', 'english', 'science'], B: ['history', 'art', 'pe'] });
   music.play('hall');
+  if (G.pi !== 0) placePlayer(-12, 1.6, Math.PI);
   beginPhase();
   if (fresh && G.year === 1 && G.day === 1 && G.pi === 0) {
     await overlayCard(`<div class="bigemoji">🏫👀</div><h2>WELCOME TO GOOGLY HIGH, ${G.name.toUpperCase()}!</h2>
