@@ -524,7 +524,7 @@ export class World {
     const ink = b.chalky ? '#f2f2ea' : { math: '#1a3a9a', science: '#1a7a3a', art: '#c8206a', detention: '#b8202a' }[k] || '#1a1a1a';
     g.fillStyle = ink; g.textAlign = 'left'; g.textBaseline = 'alphabetic';
     const font = b.chalky ? '"Chalkboard SE", "Comic Sans MS", cursive' : '"Marker Felt", "Comic Sans MS", cursive';
-    g.font = `700 ${Math.round(h * 0.16)}px ${font}`; g.fillText(title, 40, h * 0.24);
+    let tf = Math.round(h * 0.16); g.font = `700 ${tf}px ${font}`; while (g.measureText(title).width > w - 80 && tf > 20) { tf -= 2; g.font = `700 ${tf}px ${font}`; } g.fillText(title, 40, h * 0.24);
     g.fillRect(40, h * 0.28, Math.min(w - 80, g.measureText(title).width), 4);
     g.font = `600 ${Math.round(h * 0.1)}px ${font}`; let y = h * 0.42; if (sub) y = wrapText(g, sub, 40, y, w - 80, h * 0.12);
     g.font = `500 ${Math.round(h * 0.085)}px ${font}`; for (const l of lines) { g.fillText(l, 60, y); y += h * 0.11; }

@@ -30,10 +30,11 @@ h2 { font-family: "Futura", "Arial Black", sans-serif; color: #ffd23a; margin: 0
 .seg button { flex: 1; background: #ffffff14; border-color: #ffffff33; padding: 6px 8px; font-size: 13px; }
 .seg button.on { background: #b8860b; border-color: #fff; }
 #scr-title { justify-content: flex-start; padding-left: max(16px, 5vw); background: linear-gradient(90deg, #05070cdd, #05070c33 62%, #05070c00); }
-#scr-title .card { max-width: 440px; padding: 16px 20px; }
+#scr-title .card { max-width: 460px; padding: 16px 20px; overflow-x: hidden; }
 #scr-title .label { margin: 7px 0 4px; }
 #scr-title #nm { padding: 7px 12px; font-size: 18px; }
-#scr-title h1 { font-size: clamp(30px, 3.3vw, 50px); white-space: nowrap; }
+#scr-title h1 { font-size: clamp(28px, 2.9vw, 42px); white-space: nowrap; }
+#scr-title h1 span { display: inline-block; }
 #scr-title .sub { margin: 8px 0 10px; font-size: 15px; }
 #scr-title .row button { padding: 7px 11px; font-size: 13px; }
 #scr-title button.big { padding: 11px 20px; }
@@ -50,13 +51,14 @@ h2 { font-family: "Futura", "Arial Black", sans-serif; color: #ffd23a; margin: 0
 #c-phase { font-size: 12px; letter-spacing: 1.5px; margin-top: 1px; color: #9ad8ff; }
 #c-phase.late { color: #ff8a7a; animation: blink .5s infinite alternate; }
 #c-left { font-size: 10px; letter-spacing: 1px; opacity: .65; margin-top: 2px; }
-#obj { left: max(12px, env(safe-area-inset-left)); top: 10px; max-width: 340px; font-size: 14px; line-height: 1.4; }
+#obj { left: max(12px, env(safe-area-inset-left)); top: 10px; max-width: min(340px, 30vw); font-size: 14px; line-height: 1.4; }
 #obj .oh { font-size: 10px; letter-spacing: 2px; color: #ffd23a; }
 #o-text b { color: #ffe07a; }
 #o-sched { margin-top: 6px; font-size: 12px; opacity: .85; font-weight: 700; }
 #o-sched div { display: flex; gap: 6px; } #o-sched .done { opacity: .45; } #o-sched .now { color: #ffe07a; } #o-sched .late { color: #ff9a8a; } #o-sched .skip { color: #ff6a6a; text-decoration: line-through; }
 #minimap { right: max(12px, env(safe-area-inset-right)); top: 10px; padding: 5px; line-height: 0; }
 #mm { width: 340px; height: 150px; border-radius: 10px; }
+@media (max-width: 1250px) { #mm { width: 260px; height: 115px; } }
 #stats { right: max(12px, env(safe-area-inset-right)); bottom: 12px; width: 250px; padding: 8px 12px; }
 .gparow { display: flex; align-items: baseline; gap: 8px; } .gpal { font-size: 11px; letter-spacing: 2px; color: #ffd23a; }
 #s-gpa { font-family: Futura, "Arial Black", sans-serif; font-size: 30px; } #s-money { margin-left: auto; color: #7dff9a; font-size: 18px; font-family: Futura, "Arial Black", sans-serif; }
@@ -71,7 +73,7 @@ h2 { font-family: "Futura", "Arial Black", sans-serif; color: #ffd23a; margin: 0
 #tally b { font-family: Futura, "Arial Black", sans-serif; font-size: 20px; }
 #center { position: absolute; left: 50%; top: 22%; transform: translateX(-50%); font-family: Futura, "Arial Black", sans-serif; font-size: clamp(26px, 5.4vw, 60px); text-shadow: 4px 4px 0 #000; text-align: center; transition: opacity .3s; width: 96vw; line-height: 1.1; opacity: 0; }
 #center small { display: block; font-family: "Avenir Next", sans-serif; font-size: clamp(14px, 2vw, 20px); font-weight: 800; margin-top: 6px; }
-#prompt { position: absolute; left: 50%; top: 62%; transform: translateX(-50%); font-weight: 900; font-size: 19px; text-shadow: 2px 2px 0 #000; text-align: center; white-space: nowrap; }
+#prompt { position: absolute; left: 50%; top: 62%; transform: translateX(-50%); font-weight: 900; font-size: 19px; text-shadow: 2px 2px 0 #000; text-align: center; max-width: 90vw; }
 #prompt .k { display: inline-block; background: #fff; color: #000; border-radius: 6px; padding: 0 7px; margin: 0 3px; font-size: 15px; box-shadow: 0 2px 0 #888; }
 #prompt small { display: block; font-size: 13px; opacity: .85; font-weight: 700; margin-top: 3px; }
 #saved { position: absolute; left: 50%; top: 104px; transform: translateX(-50%); font-weight: 900; font-size: 12px; letter-spacing: 2px; color: #7dff9a; opacity: 0; transition: opacity .4s; text-shadow: 1px 1px #000; }
