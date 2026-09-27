@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b0e16">
+<title>Googly School</title>
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{ "imports": { "three": "/three/three.module.js", "three/addons/": "/three/addons/" } }</script>
+</head>
+<body>
+<canvas id="view"></canvas>
+
+<!-- title -->
+<section id="scr-title" class="screen">
+  <div class="card">
+    <h1><span class="g">GOOGLY</span> <span class="s">SCHOOL</span></h1>
+    <p class="sub">Three years of high school in one hour. Make the <b class="gd">best</b> decisions… or the <b class="bd">worst</b>.</p>
+    <input id="nm" maxlength="14" placeholder="Your name" autocomplete="off">
+    <div class="label">YOU ARE A…</div>
+    <div class="seg" id="gender"><button data-v="girl">👧 Girl</button><button data-v="boy">👦 Boy</button></div>
+    <div class="label">YOUR GOOGLY</div>
+    <div id="swatches"></div>
+    <div class="label">OUTFIT</div>
+    <div class="seg small" id="tops"></div>
+    <div class="label">EXTRA</div>
+    <div class="seg small" id="hats"></div>
+    <button id="b-start" class="big green wide">▶ START HIGH SCHOOL<small>Year 1, Day 1 · the bus just pulled up</small></button>
+    <button id="b-continue" class="big brown wide hidden">↻ CONTINUE<small id="continue-sub"></small></button>
+    <div class="row"><button id="b-fs" class="grey">⛶ Full screen</button><button id="b-music" class="grey">♪ Music</button><button id="b-sfx" class="grey">🔊 Sound</button><button id="b-help" class="grey">? How to play</button></div>
+  </div>
+</section>
+
+<section id="scr-help" class="screen hidden">
+  <div class="card wide help">
+    <h2>HOW TO PLAY</h2>
+    <p>🏫 You're a googly at <b>Googly High</b>. High school lasts <b>3 years</b> — that's <b>one hour</b> of play. Each year has 6 school days, and every day follows the bell schedule: before school, three classes, lunch, and after school.</p>
+    <p>🔔 When the bell rings, <b>get to your next class</b> (follow the gold marker and the map). Be late and you're <b>tardy</b>. Don't show up and you <b>skipped</b> — and if Principal Googlesworth catches you in the halls, it's off to his office.</p>
+    <p>🤔 Everything is a <b>decision</b>. Friends, crushes, bullies and teachers will walk up to you. Answer the teacher's questions in class. Choose where to sit at lunch. Pull the fire alarm… or don't. After each choice you'll see if it was the <b class="gd">BEST</b> or the <b class="bd">WORST</b> decision.</p>
+    <p>📈 Your <b>grades</b> (GPA), <b>popularity</b>, <b>conduct</b>, <b>energy</b> and <b>money</b> all change. 3 detentions = a suspension. 3 suspensions = <b>expelled</b>. Big days: tests, the Homecoming Dance, the Talent Show, the Championship Game, Prom — and Graduation.</p>
+    <p class="kbonly">⌨️ <b>WASD</b> walk · <b>Shift</b> run · <b>Space</b> jump · <b>Mouse</b> look (click the game first) · <b>E</b> use / talk / sit · <b>1–4</b> pick a choice · <b>Tab</b> report card · <b>Esc</b> pause. The game saves itself every 30 seconds.</p>
+    <div class="row"><button class="back big green">GOT IT</button></div>
+  </div>
+</section>
+
+<section id="scr-pause" class="screen hidden">
+  <div class="card">
+    <h2>PAUSED</h2>
+    <p class="sub">The bell won't ring until you come back.</p>
+    <div class="vols">
+      <label>Music <input type="range" id="vol-music" min="0" max="1" step="0.05"></label>
+      <label>Sound <input type="range" id="vol-sfx" min="0" max="1" step="0.05"></label>
+      <label>Ambience <input type="range" id="vol-amb" min="0" max="1" step="0.05"></label>
+      <label>Mouse speed <input type="range" id="sens" min="0.3" max="2.5" step="0.05"></label>
+    </div>
+    <div class="row"><button id="p-resume" class="big green">RESUME</button></div>
+    <div class="row"><button id="p-title" class="grey">Save &amp; quit to title</button><button id="p-restart" class="red">Restart high school</button></div>
+  </div>
+</section>
+
+<!-- overlays: intro, night, report card, suspended -->
+<section id="scr-over" class="screen hidden">
+  <div class="card wide" id="over-card"></div>
+</section>
+
+<!-- the yearbook -->
+<section id="scr-end" class="screen hidden">
+  <div class="yearbook">
+    <div class="yb-left">
+      <div class="yb-head">GOOGLY HIGH YEARBOOK</div>
+      <img id="yb-photo" alt="">
+      <div id="yb-name"></div>
+      <div id="yb-super"></div>
+      <div id="yb-future"></div>
+    </div>
+    <div class="yb-right">
+      <div id="yb-title"></div>
+      <div id="yb-sub"></div>
+      <div id="yb-stats"></div>
+      <div id="yb-awards"></div>
+      <div class="yb-cols"><div><div class="label gd">★ YOUR BEST DECISIONS</div><div id="yb-best"></div></div><div><div class="label bd">✗ YOUR WORST DECISIONS</div><div id="yb-worst"></div></div></div>
+      <div class="row"><button id="yb-again" class="big green">PLAY HIGH SCHOOL AGAIN</button><button id="yb-title-b" class="grey">Title screen</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- HUD -->
+<div id="hud" class="hidden">
+  <div id="clockpill" class="pill"><small id="c-year">YEAR 1</small><b id="c-time">7:40 AM</b><div id="c-phase">BEFORE SCHOOL</div><div id="c-left"></div></div>
+  <div id="obj" class="pill"><div class="oh">NOW</div><div id="o-text"></div><div id="o-sched"></div></div>
+  <div id="minimap" class="pill"><canvas id="mm" width="340" height="150"></canvas></div>
+  <div id="stats" class="pill">
+    <div class="gparow"><span class="gpal">GPA</span><b id="s-gpa">3.0</b><span id="s-money">$20</span></div>
+    <div class="bar" id="b-pop"><span>⭐</span><div><i></i></div><b></b></div>
+    <div class="bar" id="b-conduct"><span>😇</span><div><i></i></div><b></b></div>
+    <div class="bar" id="b-energy"><span>⚡</span><div><i></i></div><b></b></div>
+    <div id="s-det"></div>
+  </div>
+  <div id="tally" class="pill"><span class="gd">★ <b id="t-best">0</b> best</span><span class="bd">✗ <b id="t-worst">0</b> worst</span></div>
+  <div id="prompt"></div>
+  <div id="center"></div>
+  <div id="saved">✓ SAVED</div>
+  <div id="keys" class="kbonly">WASD walk · Shift run · E use · Tab report card · Esc pause</div>
+  <div id="classbar" class="pill hidden"><small id="cb-sub">MATH · ROOM 101</small><b id="cb-lesson"></b><div id="cb-teacher"></div></div>
+</div>
+
+<!-- decision card -->
+<div id="card" class="hidden">
+  <div class="who"><i id="card-dot"></i><span id="card-who"></span><span id="card-where"></span></div>
+  <div id="card-text"></div>
+  <div id="card-choices"></div>
+  <div id="card-timer"><i></i></div>
+</div>
+<div id="result" class="hidden"><div id="r-grade"></div><div id="r-text"></div><div id="r-deltas"></div></div>
+<div id="toast"></div>
+<div id="clickto" class="hidden"><div>CLICK TO LOOK AROUND<small>Move the mouse to turn · Esc to pause</small></div></div>
+<div id="fade"></div>
+
+<script type="module">if (new URLSearchParams(location.search).has("icon")) import("./js/icon.js").then(m => m.renderIcon()); else import("./js/main.js");</script>
+</body>
+</html>
