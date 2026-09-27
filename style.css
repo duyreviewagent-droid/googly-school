@@ -141,3 +141,14 @@ h2 { font-family: "Futura", "Arial Black", sans-serif; color: #ffd23a; margin: 0
 .dec { background: #fff; border-radius: 10px; padding: 7px 10px; margin-bottom: 6px; font-weight: 700; font-size: 13px; box-shadow: 0 2px 6px #0002; } .dec small { display: block; opacity: .6; font-size: 11px; }
 .yearbook .row button.grey { background: #6a6a7a; }
 @media (max-width: 800px) { .yearbook { flex-direction: column; overflow: auto; } .yb-left { width: 100%; } #minimap { display: none; } }
+@media (max-height: 720px) {
+  #scr-title .card { padding: 10px 16px; }
+  #scr-title h1 { font-size: 32px; }
+  #scr-title .sub { margin: 4px 0 6px; font-size: 13px; }
+  #scr-title .label { margin: 4px 0 3px; font-size: 11px; }
+  #scr-title #nm { padding: 4px 10px; font-size: 16px; }
+  #scr-title .seg button { padding: 4px 6px; font-size: 12px; }
+  #scr-title button.big { padding: 8px 16px; font-size: 18px; margin-top: 6px; }
+  #scr-title .row { margin-top: 6px; } #scr-title .row button { padding: 5px 9px; font-size: 12px; }
+  #swatches div { width: 22px !important; height: 22px !important; }
+}
